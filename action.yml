@@ -1,0 +1,36 @@
+name: 'Auto Release Notes'
+description: 'Auto-generate release notes from conventional commits. Zero external dependencies.'
+author: 'suoyinjv'
+branding:
+  icon: 'file-text'
+  color: 'green'
+
+inputs:
+  token:
+    description: 'GitHub token'
+    required: true
+    default: ${{ github.token }}
+  tag-prefix:
+    description: 'Prefix for version tags (e.g. "v")'
+    required: false
+    default: 'v'
+  draft:
+    description: 'Create release as draft'
+    required: false
+    default: 'false'
+  prerelease:
+    description: 'Mark release as prerelease'
+    required: false
+    default: 'false'
+
+outputs:
+  release-notes:
+    description: 'Generated release notes markdown'
+  release-version:
+    description: 'Detected or computed version'
+  release-url:
+    description: 'URL of the created release'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
